@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.mall.mapper.SpuMapper">
+	
+	
+	
+	<!-- int insertSpuProduct(T_MALL_PRODUCT tmp); -->
+	<insert id="insertSpuProduct" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.atguigu.mall.bean.T_MALL_PRODUCT">
+		insert into t_mall_product(shp_mch,shp_tp,flbh1,flbh2,pp_id,shp_msh) values(#{shp_mch},#{shp_tp},#{flbh1},#{flbh2},#{pp_id},#{shp_msh})
+	</insert>
+	
+	
+	<!-- void insertSpu_tp(int id, List<String> list_img); -->
+	<insert id="insertSpu_tp">
+		insert into t_mall_product_image(shp_id,url) values
+		<foreach collection="list_img" item="image" separator=",">
+			(#{spu_id},#{image})
+		</foreach>
+	</insert>
+	
+	<!-- List<T_MALL_PRODUCT> selectshpxx(Map<String, Object> map); -->
+	<select id="selectshpxx" parameterType="Map" resultType="com.atguigu.mall.bean.T_MALL_PRODUCT" >
+		select * from t_mall_product where flbh2=#{flbh2} and pp_id=#{pp_id}
+	</select>
+	
+		
+</mapper>
