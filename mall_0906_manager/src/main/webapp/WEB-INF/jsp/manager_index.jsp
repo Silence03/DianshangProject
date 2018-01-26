@@ -34,7 +34,7 @@
 							<li >
 								<span>商品属性管理</span>
 								<ul>
-									<li>商品属性查询</li>
+									<li><a href="javascript:add_tab('goto_attr_list.do','商品属性查询');">商品属性查询</a></li>
 									<li><a href="javascript:add_tab('manager_attr_add.do','商品属性添加');">商品属性添加</a></li>
 								</ul>
 							</li>
@@ -65,12 +65,21 @@
 	<div data-options="region:'south',border:false" style="height: 50px; background: #A9FACD; padding: 10px;">
 		south region
 	</div>
-	<div data-options="region:'center',title:'Center'">
-		<div id="tt" class="easyui-tabs"></div>
+	<div data-options="region:'center',title:'Center'" >
+		<div id="tt" class="easyui-tabs" style="height:500px"></div>
 	</div>
 
 
 <script type="text/javascript">
+	$(function(){
+		var url = "${url}";
+		var title = "${title}";
+		if(url!=""){
+			add_tab(url,title);
+		}
+		
+	});
+	
 	function add_tab(url,title){
 		var flag = $('#tt').tabs('exists',title);
 		if(flag){

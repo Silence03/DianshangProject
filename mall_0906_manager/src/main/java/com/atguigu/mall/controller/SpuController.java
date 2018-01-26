@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.atguigu.mall.bean.T_MALL_PRODUCT;
 import com.atguigu.mall.service.SpuService;
@@ -27,11 +28,15 @@ public class SpuController {
 		return "manager_spu_add";
 	}
 	@RequestMapping("/save_spu")
-	public String save_spu(T_MALL_PRODUCT tmp,@RequestParam("files") MultipartFile[] files)  {
+	public ModelAndView save_spu(T_MALL_PRODUCT tmp,@RequestParam("files") MultipartFile[] files)  {
 		System.out.println(tmp);
 		//使用工具类上传图片返回图片名称
 		List<String> list_img = MyUtils.uploadimg(files);
 		spuService.saveSpuProduct(tmp,list_img);
-		return "redirect:/go_spu_add.do";
+		
+		ModelAndView mv = new ModelAndView("redirect:/manager_index.do");
+		mv.addObject("url","go_spu_add.do");
+		mv.addObject("title","商品信息添加");
+		return mv;
 	}
 }

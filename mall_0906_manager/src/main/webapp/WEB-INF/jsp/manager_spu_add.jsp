@@ -9,22 +9,29 @@
 
 </head>
 <body>
-	<h2>商品信息添加</h2>
-	<form action="save_spu.do" method="post" enctype="multipart/form-data">
-		一级分类<select name="flbh1" id="spu_class_1" onchange="get_spu_class2(this.value)"></select>
-		二级分类<select name="flbh2" id="spu_class_2"></select>
-		商品品牌<select name="pp_id" id="spu_class_3"></select><br/>
-		<hr>
-		商品名称<input type="text" name="shp_mch"/><br/>
-		商品描述<textarea name="shp_msh"></textarea><br/>
-		商品图片<br>
-		<div id="button_id" style="border:1px solid black;width:100px;height:100px;float: left">
-			<img id="img_0" src="image/upload_hover.png" width="100px" height="100px"  onclick="button_img_click(0)">
-			<input type="file" id="file_0" name="files" onchange="button_img_change(0)" style="display:none"/><br>
+		<div class="easyui-layout" data-options="fit:true">
+		<h2>商品信息添加</h2>
+		<form action="save_spu.do" method="post" enctype="multipart/form-data">
+			<div data-options="region:'north',split:true," style="height:50px">
+				一级分类<select name="flbh1" id="spu_class_1" onchange="get_spu_class2(this.value)"></select>
+				二级分类<select name="flbh2" id="spu_class_2"></select>
+				商品品牌<select name="pp_id" id="spu_class_3"></select><br/>
+			</div>
+			<div data-options="region:'west',split:true," style="width:100px"></div>
+			<div data-options="region:'center'," >
+				商品名称<input type="text" name="shp_mch"/><br/>
+				商品描述<textarea name="shp_msh"></textarea><br/>
+				商品图片<br>
+					<div id="button_id" style="border:1px solid black;width:100px;height:100px;float: left">
+						<img id="img_0" src="image/upload_hover.png" width="100px" height="100px"  onclick="button_img_click(0)">
+						<input type="file" id="file_0" name="files" onchange="button_img_change(0)" style="display:none"/><br>
+					</div>
+			<input type="submit" value="提交"/>
+			</div>
+		</form>
 		</div>
-		<br><br><br><br><br>
-		<input type="submit" value="提交"/>
-	</form>
+	
+	
 	
 <script type="text/javascript">
 	$(function(){
