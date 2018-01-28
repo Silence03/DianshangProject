@@ -10,7 +10,7 @@
 <script type="text/javascript">
 	
 </script>
-<title>Insert title here</title>
+<title>商城首页</title>
 </head>
 <body>
 	<h2 align="center">交易系统首页</h2>

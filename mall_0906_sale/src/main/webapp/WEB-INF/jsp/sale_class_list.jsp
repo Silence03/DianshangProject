@@ -22,7 +22,7 @@ function get_class2(class_1_id){
 	$.getJSON("js/json/class_2_"+class_1_id+".js",function(data){
 		$("#sale_index_class_2").empty();
 		$.each(data,function(i,n){
-			$("#sale_index_class_2").append("<li value="+n.id+">"+n.flmch2+"</li>");
+			$("#sale_index_class_2").append("<li value="+n.id+"><a href='goto_attr_list.do?class_2_id="+n.id+"'>"+n.flmch2+"</a></li>");
 		});
 	});
 }
@@ -31,7 +31,7 @@ function get_class2(class_1_id){
 </head>
 <body>
 	<ul name="flbh1" id="sale_index_class_1" style="width:70px;float: left;"></ul>
-	<ul name="flbh2" id="sale_index_class_2" style="width:70px;float: left;"></ul>
+	<ul name="flbh2" id="sale_index_class_2" style="width:80px;float: left;"></ul>
 	
 </body>
 </html>

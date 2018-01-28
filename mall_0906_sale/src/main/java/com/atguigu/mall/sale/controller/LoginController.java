@@ -42,7 +42,7 @@ public class LoginController {
 		if(loginuser==null) {
 			return "sale_login";
 		}else {
-			System.out.println("loginuser==>"+loginuser);
+			//System.out.println("loginuser==>"+loginuser);
 			String yh_nch = loginuser.getYh_nch();
 			Cookie cookie = null;
 			try {
