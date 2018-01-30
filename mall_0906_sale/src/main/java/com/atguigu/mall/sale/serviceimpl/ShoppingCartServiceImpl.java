@@ -33,4 +33,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		
 	}
 
+	@Override
+	public void update_cartcookie2db(T_MALL_SHOPPINGCAR cart) {
+		shoppingCartMapper.update_cartcookie2db(cart);
+		
+	}
+
+	@Override
+	public void update_cart_status(T_MALL_SHOPPINGCAR cart) {
+		shoppingCartMapper.update_cart_status(cart);
+		
+	}
+
 }

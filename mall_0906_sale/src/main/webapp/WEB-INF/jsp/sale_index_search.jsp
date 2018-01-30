@@ -13,8 +13,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="javascript:;">购物车</a>
-	<br/>
 	<input type="text" /><input type="button" value="搜索"/>
+	<jsp:include page="sale_miniCart.jsp"></jsp:include>
+	<br/>
 </body>
 </html>

@@ -13,4 +13,8 @@ public interface ShoppingCartMapper {
 
 	void insert_list_cart(T_MALL_SHOPPINGCAR cart);
 
+	void update_cartcookie2db(T_MALL_SHOPPINGCAR cart);
+
+	void update_cart_status(T_MALL_SHOPPINGCAR cart);
+
 }

@@ -13,6 +13,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="sale_header.jsp"></jsp:include>
 	<h2 align="center">商品列表页面</h2>
 	
 	<jsp:include page="sale_attr_list_inner.jsp"></jsp:include>

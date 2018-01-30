@@ -13,7 +13,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>购物车添加成功</h2>
-	<jsp:include page="sale_header.jsp"></jsp:include>
+	<c:forEach items="${list_cart }" var="cart">
+		<img alt="" src="upload/image/${cart.shp_tp }" width="70px"> 
+		&nbsp;&nbsp;<input type="checkbox" onclick="check_item(${cart.sku_id},checked)"  ${cart.shfxz=="1"?"checked":"" }/> ${cart.sku_mch }
+		&nbsp;&nbsp;${cart.tjshl }
+		&nbsp;&nbsp;${cart.hj }
+		<br/>
+	</c:forEach>
+	总金额：￥${sum }
 </body>
 </html>

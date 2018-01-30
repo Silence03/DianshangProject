@@ -8,12 +8,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
-	
+	function show_cart(){
+		$.get("get_miniCart.do",{},function(data){
+			$("#miniCart_list_inner").html(data);
+		});
+		$("#miniCart_list_inner").show();
+	}
+	function hidden_cart(){
+		$("#miniCart_list_inner").hide();
+	}
 </script>
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>购物车添加成功</h2>
-	<jsp:include page="sale_header.jsp"></jsp:include>
+	&nbsp;&nbsp;<a href="goto_cart_list.do" onmouseover="show_cart()" onmouseout="hidden_cart()">购物车</a>
+	<div id="miniCart_list_inner"></div>
 </body>
 </html>
