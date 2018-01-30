@@ -6,11 +6,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.atguigu.mall.sale.bean.DETAIL_T_MALL_SKU;
 import com.atguigu.mall.sale.bean.OBJECCT_T_MALL_SKU;
 import com.atguigu.mall.sale.bean.OBJECT_T_MALL_ATTR;
 import com.atguigu.mall.sale.bean.OBJECT_T_MALL_SKU_ATTR_VALUE;
+import com.atguigu.mall.sale.bean.T_MALL_SHOPPINGCAR;
+import com.atguigu.mall.sale.bean.T_MALL_SKU;
 import com.atguigu.mall.sale.service.AttrService;
 import com.atguigu.mall.sale.service.SkuListService;
 
@@ -47,4 +49,15 @@ public class SkuListController {
 		map.put("class_2_id", class_2_id);
 		return "sale_sku_list";
 	}
+	//点击去往商品详情页
+	@RequestMapping("/goto_sku_detail")
+	public String goto_sku_detail(Integer sku_id,Integer spu_id,Map<String,Object> map) {
+		DETAIL_T_MALL_SKU obj_sku = skuListService.get_sku_detail(sku_id, spu_id);//商品详情数据
+		List<T_MALL_SKU> list_sku = skuListService.get_sku_list_by_spu_id(spu_id);//与该商品同一个spuid下的所有商品
+		map.put("obj_sku", obj_sku);
+		map.put("list_sku", list_sku);
+		return "sale_sku_detail";
+	}
+	
+
 }

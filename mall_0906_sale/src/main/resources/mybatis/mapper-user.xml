@@ -7,8 +7,8 @@
 	
 	
 	
-	<!-- 	T_MALL_USER selectUserByMcAndMm(T_MALL_USER user); -->
-	<select id="selectUserByMcAndMm" resultType="com.atguigu.mall.sale.bean.T_MALL_USER">
+	<!-- 	T_MALL_USER_ACCOUNT selectUserByMcAndMm(T_MALL_USER_ACCOUNT user); -->
+	<select id="selectUserByMcAndMm" resultType="com.atguigu.mall.sale.bean.T_MALL_USER_ACCOUNT">
 		select * from t_mall_user_account where yh_mch=#{yh_mch} and yh_mm=#{yh_mm}
 	</select>
 

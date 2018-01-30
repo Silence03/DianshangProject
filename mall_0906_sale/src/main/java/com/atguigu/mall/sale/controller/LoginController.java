@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.atguigu.mall.sale.bean.T_MALL_USER;
+import com.atguigu.mall.sale.bean.T_MALL_USER_ACCOUNT;
 import com.atguigu.mall.sale.service.LoginService;
 
 @Controller
@@ -36,8 +37,8 @@ public class LoginController {
 	}
 	//用户登陆功能
 	@RequestMapping("/login")
-	public String dologin(T_MALL_USER user,Map<String,Object> map,HttpSession session,HttpServletResponse response)  {
-		T_MALL_USER loginuser = loginService.getUserByMcAndMm(user);
+	public String dologin(T_MALL_USER_ACCOUNT user,Map<String,Object> map,HttpSession session,HttpServletResponse response)  {
+		T_MALL_USER_ACCOUNT loginuser = loginService.getUserByMcAndMm(user);
 		map.put("user", loginuser);
 		if(loginuser==null) {
 			return "sale_login";

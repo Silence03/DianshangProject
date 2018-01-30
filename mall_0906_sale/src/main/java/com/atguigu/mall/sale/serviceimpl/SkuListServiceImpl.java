@@ -7,7 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.atguigu.mall.sale.bean.DETAIL_T_MALL_SKU;
 import com.atguigu.mall.sale.bean.OBJECCT_T_MALL_SKU;
+import com.atguigu.mall.sale.bean.T_MALL_SKU;
 import com.atguigu.mall.sale.bean.T_MALL_SKU_ATTR_VALUE;
 import com.atguigu.mall.sale.mapper.SkuListMapper;
 import com.atguigu.mall.sale.service.SkuListService;
@@ -57,6 +59,22 @@ public class SkuListServiceImpl implements SkuListService {
 		map.put("sql", sql.toString());
 		List<OBJECCT_T_MALL_SKU> list_sku = skuListMapper.select_skulist_by_attr(map);
 		return list_sku;
+	}
+
+	@Override
+	public DETAIL_T_MALL_SKU get_sku_detail(Integer sku_id, Integer spu_id) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("sku_id", sku_id);
+		map.put("spu_id", spu_id);
+		DETAIL_T_MALL_SKU sku_detail = skuListMapper.select_sku_detail(map);
+		return sku_detail;
+	}
+
+	@Override
+	public List<T_MALL_SKU> get_sku_list_by_spu_id(Integer spu_id) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("spu_id", spu_id);
+		return skuListMapper.select_sku_list_by_spu_id(map);
 	}
 
 }
