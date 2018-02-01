@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd 
+		http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+		
+		<!-- 注解扫描 -->
+		<context:component-scan base-package="com.atguigu.mall.*">
+			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		</context:component-scan>
+		<!-- 用户服务 -->
+		<!-- soap -->
+	 	<jaxws:endpoint address="/user" implementorClass="com.atguigu.mall.server.UserServer">
+			<jaxws:implementor>
+				<bean class="com.atguigu.mall.serverimpl.UserServerImpl"></bean>
+			</jaxws:implementor>
+		</jaxws:endpoint>
+		<!-- restful --> 
+		<jaxrs:server address="/rsuser" >
+			<jaxrs:serviceBeans>
+				<bean class="com.atguigu.mall.serverimpl.UserServerImpl"></bean>
+			</jaxrs:serviceBeans>
+		</jaxrs:server>
+		<!-- 地址服务 -->
+		<!-- soap -->
+		<jaxws:endpoint address="/address" implementorClass="com.atguigu.mall.server.AddressServer">
+			<jaxws:implementor>
+				<bean class="com.atguigu.mall.serverimpl.AddressServerImpl"></bean>
+			</jaxws:implementor>
+		</jaxws:endpoint>
+		<!-- restful -->
+		<jaxrs:server address="/rsaddress" >
+			<jaxrs:serviceBeans>
+				<bean class="com.atguigu.mall.serverimpl.AddressServerImpl"></bean>
+			</jaxrs:serviceBeans>
+		</jaxrs:server>
+
+		
+		<!-- 数据库连接 -->
+		<context:property-placeholder location="classpath:jdbc.properties"/>
+		<bean id="dataSource1" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+			<property name="driverClass" value="${jdbc.driver}"></property>
+			<property name="jdbcUrl" value="${jdbc.url1}"></property>
+			<property name="user" value="${jdbc.username}"></property>
+			<property name="password" value="${jdbc.password}"></property>
+		</bean>
+		
+		<bean id="dataSource2" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+			<property name="driverClass" value="${jdbc.driver}"></property>
+			<property name="jdbcUrl" value="${jdbc.url2}"></property>
+			<property name="user" value="${jdbc.username}"></property>
+			<property name="password" value="${jdbc.password}"></property>
+		</bean>
+		<bean id="dataSource" class="com.atguigu.mall.util.MyRoutingDataSource">
+			<property name="targetDataSources">
+				<map>
+					<entry key="1" value-ref="dataSource1"></entry>
+					<entry key="2" value-ref="dataSource2"></entry>
+				</map>
+			</property>
+			<property name="defaultTargetDataSource" ref="dataSource2" ></property>
+		</bean>
+		
+		
+		
+		<!-- sqlsession管理 -->
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		    <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		    <property name="dataSource" ref="dataSource"></property>
+		    <property name="mapperLocations">
+		        <list>
+		            <value>classpath*:mybatis/mapper-*.xml</value>
+		        </list>
+		    </property>
+		</bean>
+		
+		<!-- 扫描Mapper映射配置 -->
+		<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+			<property name="basePackage" value="com.atguigu.mall.mapper"/>
+		</bean>
+		<!-- 事务管理器 -->
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+			
+</beans>

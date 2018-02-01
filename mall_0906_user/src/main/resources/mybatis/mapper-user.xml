@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.mall.mapper.UserMapper">
+	
+	
+	
+	<!-- 	T_MALL_USER_ACCOUNT selectUserByYhmcAndPwd(T_MALL_USER_ACCOUNT user); -->
+	<select id="selectUserByYhmcAndPwd" resultType="com.atguigu.mall.bean.T_MALL_USER_ACCOUNT">
+		select * from t_mall_user_account where yh_mch=#{yh_mch} and yh_mm=#{yh_mm}
+	</select>
+	
+	<!-- T_MALL_USER_ACCOUNT insert(T_MALL_USER_ACCOUNT user); -->
+	<insert id="insert" useGeneratedKeys="true"  keyColumn="id" keyProperty="id">
+		insert into t_mall_user_account(yh_mch,yh_mm) values(#{yh_mch},#{yh_mm})
+	</insert>
+	
+	<!-- int updateUserById(T_MALL_USER_ACCOUNT user); -->
+	<update id="updateUserById">
+		update t_mall_user_account
+		<set>
+			<if test="yh_mch!=null">
+				yh_mch=#{yh_mch},
+			</if>
+			<if test="yh_mm!=null">
+				yh_mm=#{yh_mm},
+			</if>
+			<if test="yh_nch!=null">
+				yh_nch=#{yh_nch},
+			</if>
+			<if test="yh_xm!=null">
+				yh_xm=#{yh_xm},
+			</if>
+			<if test="yh_shjh!=null">
+				yh_shjh=#{yh_shjh},
+			</if>
+			<if test="yh_yx!=null">
+				yh_yx=#{yh_yx},
+			</if>
+			<if test="yh_tx!=null">
+				yh_tx=#{yh_tx},
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+
+		
+</mapper>

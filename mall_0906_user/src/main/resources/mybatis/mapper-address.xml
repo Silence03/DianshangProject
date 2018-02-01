@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.mall.mapper.AddressMapper">
+	
+	
+	<!-- int insertAddressByYhid(T_MALL_ADDRESS address); -->
+	<insert id="insertAddressByYhid" useGeneratedKeys="true"  keyColumn="id" keyProperty="id">
+		insert into t_mall_address(yh_dz,yh_id,shjr,lxfsh) values(#{yh_dz},#{yh_id},#{shjr},#{lxfsh})
+	</insert>
+	
+	<!-- int updateAddressByYhid(T_MALL_ADDRESS address); -->
+	<update id="updateAddressByYhid">
+		update t_mall_address
+		<set>
+			<if test="yh_dz!=null">
+				yh_dz=#{yh_dz},
+			</if>
+			<if test="shjr!=null">
+				shjr=#{shjr},
+			</if>
+			<if test="lxfsh!=null">
+				lxfsh=#{lxfsh},
+			</if>
+		</set>
+		where yh_id=#{yh_id}
+	</update>
+	
+	<!-- List<T_MALL_ADDRESS> selectAddressByYhid(T_MALL_USER_ACCOUNT user); -->
+	<select id="selectAddressByYhid" resultType="com.atguigu.mall.bean.T_MALL_ADDRESS">
+		select * from t_mall_address where yh_id=#{id}
+	</select>
+	
+	<!-- T_MALL_ADDRESS selectAddressByid(Integer addr_id); -->
+	<select id="selectAddressByid" resultType="com.atguigu.mall.bean.T_MALL_ADDRESS">
+		select * from t_mall_address where id=#{id}
+	</select>
+
+		
+</mapper>

@@ -20,9 +20,16 @@ import com.atguigu.mall.sale.bean.T_MALL_USER_ACCOUNT;
 import com.atguigu.mall.sale.service.LoginService;
 import com.atguigu.mall.sale.service.ShoppingCartService;
 import com.atguigu.mall.sale.util.MyJsonUtil;
+import com.atguigu.mall.sale.util.MyWsUtil;
+import com.atguigu.mall.sale.util.PropertiyUtil;
+import com.atguigu.mall.server.UserServer;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	UserServer userServer;
+	
 	@Autowired
 	ShoppingCartService shoppingCartService;
 	
@@ -46,8 +53,23 @@ public class LoginController {
 	}
 	//用户登陆功能
 	@RequestMapping("/login")
-	public String dologin(@CookieValue(value="list_cart_cookie",required=false)String list_cart_cookie,T_MALL_USER_ACCOUNT user,Map<String,Object> map,HttpSession session,HttpServletResponse response)  {
-		T_MALL_USER_ACCOUNT loginuser = loginService.getUserByMcAndMm(user);
+	public String dologin(String dataSource_type,@CookieValue(value="list_cart_cookie",required=false)String list_cart_cookie,T_MALL_USER_ACCOUNT user,Map<String,Object> map,HttpSession session,HttpServletResponse response)  {
+		
+		//调用用户ws服务
+//		String url = PropertiyUtil.getPropertity("ws.properties", "user_url");
+//		UserServer userserver = MyWsUtil.getMyWs(url, UserServer.class);
+//		T_MALL_USER_ACCOUNT loginuser = userserver.login(user);
+		T_MALL_USER_ACCOUNT loginuser =null;
+		if(dataSource_type.equals("1")) {
+			loginuser = userServer.login(user);
+		}else {
+			loginuser = userServer.login2(user);
+		}
+		
+		
+		//T_MALL_USER_ACCOUNT loginuser = loginService.getUserByMcAndMm(user);
+		
+		
 		map.put("user", loginuser);
 		if(loginuser==null) {
 			return "sale_login";

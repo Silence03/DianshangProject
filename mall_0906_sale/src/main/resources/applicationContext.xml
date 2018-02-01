@@ -15,13 +15,17 @@
 		</context:component-scan>
 		
 		<!-- 数据库连接 -->
-		<context:property-placeholder location="classpath:jdbc.properties"/>
+		<context:property-placeholder location="classpath:jdbc.properties,classpath:ws.properties"/>
 		<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 			<property name="driverClass" value="${jdbc.driver}"></property>
 			<property name="jdbcUrl" value="${jdbc.url}"></property>
 			<property name="user" value="${jdbc.username}"></property>
 			<property name="password" value="${jdbc.password}"></property>
 		</bean>
+
+		
+		
+		
 		
 		<!-- sqlsession管理 -->
 		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -33,6 +37,17 @@
 		        </list>
 		    </property>
 		</bean>
+		<bean id="userServer" class="com.atguigu.mall.sale.util.MyWsUtil">
+			<property name="url" value="${user_url}"></property>
+			<property name="t" value="com.atguigu.mall.server.UserServer"></property>
+		</bean>
+		<bean id="addressServer" class="com.atguigu.mall.sale.util.MyWsUtil">
+			<property name="url" value="${address_url}"></property>
+			<property name="t" value="com.atguigu.mall.server.AddressServer"></property>
+		</bean>
+		
+		
+		
 		
 		<!-- 扫描Mapper映射配置 -->
 		<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
