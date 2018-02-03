@@ -25,6 +25,8 @@ public class ShoppingCartController {
 	@Autowired
 	ShoppingCartService shoppingCartService;
 	
+	
+	
 	//更新商品选中状态
 	@RequestMapping("/change_cart_status")
 	public String change_cart_status(T_MALL_SHOPPINGCAR cart,@CookieValue("list_cart_cookie")String list_cart_cookie,HttpSession session,HttpServletResponse response ,Map<String,Object> map) {
@@ -105,7 +107,9 @@ public class ShoppingCartController {
 		}
 		BigDecimal sum = new BigDecimal("0");
 		for (int i = 0; i < list_cart.size(); i++) {
-			sum = sum.add(new BigDecimal(list_cart.get(i).getHj()));
+			if(list_cart.get(i).getShfxz().equals("1")) {
+				sum = sum.add(new BigDecimal(list_cart.get(i).getHj()));
+			}
 		}
 		return sum;
 	}

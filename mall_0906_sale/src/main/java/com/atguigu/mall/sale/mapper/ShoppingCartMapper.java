@@ -17,4 +17,6 @@ public interface ShoppingCartMapper {
 
 	void update_cart_status(T_MALL_SHOPPINGCAR cart);
 
+	void delete_cart_bycartid(List<Integer> list_cart_id);
+
 }

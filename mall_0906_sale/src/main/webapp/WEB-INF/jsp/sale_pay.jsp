@@ -13,18 +13,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach items="${list_cart }" var="cart">
-		<img alt="" src="upload/image/${cart.shp_tp }" width="70px"> 
-		&nbsp;&nbsp;<input type="checkbox" onclick="check_item(${cart.sku_id},checked)"  ${cart.shfxz=="1"?"checked":"" }/> ${cart.sku_mch }
-		&nbsp;&nbsp;${cart.tjshl }
-		&nbsp;&nbsp;${cart.hj }
-		<br/>
-	</c:forEach>
-	总金额：￥${sum }
-	<hr/>
-	<form action="goto_checkout.do" method="post">
-		<input type="hidden" name="sum" value="${sum }"/>
-		<input type="submit" value="去结算"/>
-	</form>
+	<h2>支付页面</h2>
 </body>
 </html>

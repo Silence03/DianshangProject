@@ -44,6 +44,16 @@
 	</update>
 	
 	
+	<!-- void delete_cart_bycartid(List<Integer> list_cart_id); -->
+	<delete id="delete_cart_bycartid">
+		delete from t_mall_shoppingcar where id in
+		<foreach collection="list" item="gwc_id" open="(" close=")" separator=",">
+			#{gwc_id}
+		</foreach>	
+	</delete>
+	
+	
+	
 	
 	
 	
