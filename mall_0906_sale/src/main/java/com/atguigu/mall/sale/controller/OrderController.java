@@ -22,6 +22,7 @@ import com.atguigu.mall.sale.bean.T_MALL_ADDRESS;
 import com.atguigu.mall.sale.bean.T_MALL_ORDER_INFO;
 import com.atguigu.mall.sale.bean.T_MALL_SHOPPINGCAR;
 import com.atguigu.mall.sale.bean.T_MALL_USER_ACCOUNT;
+import com.atguigu.mall.sale.exception.MySaleException;
 import com.atguigu.mall.sale.service.OrderService;
 import com.atguigu.mall.sale.service.ShoppingCartService;
 import com.atguigu.mall.sale.util.MyJsonUtil;
@@ -39,6 +40,7 @@ public class OrderController {
 	@Autowired
 	ShoppingCartService shoppingCartService;
 	
+	//保存订单处理
 	@RequestMapping("/save_order")
 	public String save_order(String address_id,@ModelAttribute("order")OBJECT_T_MALL_ORDER order,HttpSession session) {
 		T_MALL_USER_ACCOUNT user = (T_MALL_USER_ACCOUNT) session.getAttribute("user");
@@ -49,7 +51,24 @@ public class OrderController {
 		//重新同步购物车的session
 		session.setAttribute("list_cart", shoppingCartService.get_list_cart(user));
 		
+		return "redirect:/goto_pay.do";
+	}
+	//去往支付页面
+	@RequestMapping("/goto_pay")
+	public String goto_pay() {
 		return "sale_pay";
+	}
+	//支付完成后进行的业务，即修改订单状态以及更新信息
+	@RequestMapping("/pay_after")
+	public String pay_after(@ModelAttribute("order")OBJECT_T_MALL_ORDER order) {
+		//调用支付服务成功后调用订单通知业务
+		try {
+			orderService.pay_order(order);
+		} catch (MySaleException e) {
+			e.printStackTrace();
+			return "sale_error";
+		}
+		return "sale_pay_success";
 	}
 	
 	//点击去结算按钮，拆单功能实现方法

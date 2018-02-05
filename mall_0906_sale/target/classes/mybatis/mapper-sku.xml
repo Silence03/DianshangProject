@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.mall.sale.mapper.SkuMapper">
+
+	<!-- Integer select_kc_count(int sku_id); -->
+	<select id="select_kc_count" resultType="Integer">
+		select count(*) from t_mall_sku where id=#{sku_id} and kc>10
+	</select>
+
+	<!-- Integer select_kc_by_skuid(int sku_id); -->
+	<select id="select_kc_by_skuid" resultType="Integer">
+		select kc from t_mall_sku where id=#{sku_id}
+	</select>
+	<!-- Integer select_kc_by_skuid_forupdate(int sku_id); -->
+	<select id="select_kc_by_skuid_forupdate" resultType="Integer">
+		select kc from t_mall_sku where id=#{sku_id} for update
+	</select>
+	
+	<!-- void update_sku_by_skuid(Map<String, Object> map); -->
+	<update id="update_sku_by_skuid" parameterType="Map">
+		update t_mall_sku set kc=kc-#{shl},sku_xl=sku_xl+#{shl} where id=#{sku_id}
+	</update>
+	
+	
+	
+		
+</mapper>

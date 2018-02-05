@@ -14,5 +14,6 @@
 </head>
 <body>
 	<h2>支付页面</h2>
+	<a href="pay_after.do">去支付</a>
 </body>
 </html>
