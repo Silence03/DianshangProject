@@ -52,4 +52,10 @@ public class AttrServiceImpl implements AttrService {
 		return attrMapper.selectattrlist(class_2_id);
 	}
 
+	@Override
+	public List<Integer> getValueIdByAttrId(int attr_id) {
+		// TODO Auto-generated method stub
+		return attrMapper.selectValueIdByAttrId(attr_id);
+	}
+
 }

@@ -51,9 +51,17 @@
 					</li>
 				</ul>
 			</div>
-			<div title="订单管理"  style="overflow:auto;padding:10px;">
-				
+			<div title="缓存管理"  style="overflow:auto;padding:10px;">
+				<ul class="easyui-tree">
+					<li>
+						<span>缓存管理</span>
+							<ul>
+								<li><a href="javascript:add_tab('go_cache.do','商品属性缓存刷新');">商品缓存管理</a></li>
+							</ul>
+					</li>
+				</ul>
 			</div>
+			<div title="订单管理"  style="overflow:auto;padding:10px;"></div>
 		</div>
 		<!-- <a href="manager_spu.do">商品信息管理</a><br/>
 		<a href="manager_attr.do">商品属性管理</a><br/>

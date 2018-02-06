@@ -10,4 +10,6 @@ public interface AttrService {
 
 	List<OBJECT_T_MALL_ATTR> get_attrlist(Integer class_2_id);
 
+	List<Integer> getValueIdByAttrId(int attr_id);
+
 }

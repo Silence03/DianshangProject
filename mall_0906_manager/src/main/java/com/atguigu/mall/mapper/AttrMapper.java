@@ -14,6 +14,8 @@ public interface AttrMapper {
 
 	List<OBJECT_T_MALL_ATTR> selectattrlist(Integer class_2_id);
 
+	List<Integer> selectValueIdByAttrId(int attr_id);
+
 	
 
 }

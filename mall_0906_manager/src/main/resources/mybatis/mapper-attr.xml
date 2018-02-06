@@ -5,6 +5,12 @@
 
 <mapper namespace="com.atguigu.mall.mapper.AttrMapper">
 
+
+	<!-- List<Integer> selectValueIdByAttrId(int attr_id); -->
+	<select id="selectValueIdByAttrId" resultType="Integer">
+		select id from t_mall_value where shxm_id=#{attr_id}
+	</select>
+
 	<!-- void insert_attr(Map<String, Object> map); -->
 	<insert id="insert_attr" parameterType="Map" useGeneratedKeys="true"  keyColumn="id" keyProperty="attr.id">
 		insert into t_mall_attr(shxm_mch,flbh2) values(#{attr.shxm_mch},#{flbh2})
