@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.mapper.SearchMapper">
+
+	<!-- List<KEYWORDS_T_MALL_SKU> select_skulist_by_class_2_id(Integer class_2_id); -->
+	<select id="select_skulist_by_class_2_id" parameterType="int" resultMap="myskulist" >
+		select sku.id sku_id,spu.id spu_id,tm.id tm_id,sku.*,spu.*,tm.* from 
+		t_mall_sku sku,
+		t_mall_trade_mark tm,
+		t_mall_product spu 
+		where 
+		sku.shp_id=spu.Id and 
+		spu.pp_id=tm.Id and 
+		flbh2=#{class_2_id}
+	</select>
+	<resultMap type="com.atguigu.bean.KEYWORDS_T_MALL_SKU" id="myskulist" autoMapping="true">
+		<result column="sku_id" property="id" />
+		<result column="spu_id" property="shp_id" />
+	</resultMap>
+	
+	
+		
+</mapper>

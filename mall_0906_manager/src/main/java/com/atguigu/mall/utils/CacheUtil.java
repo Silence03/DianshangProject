@@ -43,12 +43,24 @@ public class CacheUtil {
 	//求多个key之间的交集并返回新的key值
 	public static String getinnerkey(String[] keys) {
 		Jedis jedis = JedisPoolUtils.getJedis();
+		String new_key="inter";
 		if(jedis==null) {
 			return null;
 		}else {
-			jedis.zinterstore("new_key", keys);
+			for (int i = 0; i < keys.length; i++) {
+				new_key=new_key+"_"+keys[i];
+			}
+			//判断生成的key是否存在
+			Boolean exists = jedis.exists(new_key);
+			if(exists) {
+				//若存在则直接返回key
+				return new_key;
+			}else {
+				//若不存在则生成新的key返回
+				jedis.zinterstore(new_key, keys);
+			}
 		}
-		return "new_key";
+		return new_key;
 	}
 
 }
