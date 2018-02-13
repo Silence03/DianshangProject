@@ -8,6 +8,13 @@
 	<name>mall_0906_manager</name>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<version>4.10.1</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>

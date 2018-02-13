@@ -36,7 +36,7 @@ public class TestSetSolr {
 		System.out.println(list_keywords.size());
 		//获取solr客户端连接
 		HttpSolrServer solr = new HttpSolrServer(MyPropertiesUtil.getMyProperty("mySolr.properties", "solr_url"));
-		//设置solr的解析方式(solr与java之间的数据传输)
+		//设置solr的解析方式(solr与java之间的数据传输方式)
 		solr.setParser(new XMLResponseParser());
 		//向solr导入数据
 		solr.addBeans(list_keywords);

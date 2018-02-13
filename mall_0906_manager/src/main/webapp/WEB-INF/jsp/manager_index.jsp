@@ -54,9 +54,15 @@
 			<div title="缓存管理"  style="overflow:auto;padding:10px;">
 				<ul class="easyui-tree">
 					<li>
-						<span>缓存管理</span>
+						<span>商品缓存管理</span>
 							<ul>
 								<li><a href="javascript:add_tab('go_cache.do','商品属性缓存刷新');">商品缓存管理</a></li>
+							</ul>
+					</li>
+					<li>
+						<span>检索缓存管理</span>
+							<ul>
+								<li><a href="javascript:add_tab('go_keywordscache.do','商品关键字检索缓存刷新');">检索缓存管理</a></li>
 							</ul>
 					</li>
 				</ul>
