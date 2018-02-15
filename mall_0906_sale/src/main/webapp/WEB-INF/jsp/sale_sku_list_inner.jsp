@@ -14,7 +14,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	商品列表<br>
 	<div class="Sbox">
 		<c:forEach items="${skulist}" var="sku">
 			<div class="list">

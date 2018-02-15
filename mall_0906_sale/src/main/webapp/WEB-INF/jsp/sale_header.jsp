@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/css.css">
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -29,11 +30,17 @@
 <title>商城首页</title>
 </head>
 <body>
-	<c:if test="${empty user }">
-		<span id="yh_nch">&nbsp;</span><a href="goto_sale_login.do">请登录</a>&nbsp;&nbsp;&nbsp;  <a href="goto_regist.do">免费注册</a>
-	</c:if>
-	<c:if test="${not empty user }">
-		${user.yh_nch }，欢迎回来&nbsp;&nbsp;&nbsp;<a href="#">我的订单</a>&nbsp;&nbsp;&nbsp;<a href="goto_logout.do">退出</a>
-	</c:if>
+	<div class="top">
+		<div class="top_text">
+			<c:if test="${empty user }">
+				<span id="yh_nch">&nbsp;</span><a href="goto_sale_login.do">请登录</a>&nbsp;&nbsp;&nbsp;  <a href="goto_regist.do">免费注册</a>
+			</c:if>
+			<c:if test="${not empty user }">
+				<a >${user.yh_nch }，欢迎回来</a>&nbsp;&nbsp;&nbsp;<a href="#">我的订单</a>&nbsp;&nbsp;&nbsp;<a href="goto_logout.do">退出</a>
+			</c:if>
+		</div>
+	</div>
+
+	
 </body>
 </html>

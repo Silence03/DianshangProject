@@ -13,14 +13,27 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<c:forEach items="${list_cart }" var="cart">
-		<img alt="" src="upload/image/${cart.shp_tp }" width="70px"> 
-		&nbsp;&nbsp;${cart.sku_mch }
-		&nbsp;&nbsp;${cart.tjshl }
-		&nbsp;&nbsp;${cart.hj }
-		<br/>
-	</c:forEach>
-	总金额：￥${sum }
+	<div class="cart_pro">
+				<h6>最新加入的商品</h6>
+			<c:forEach items="${list_cart }" var="cart">
+				<div class="one">
+					<img src="upload/image/${cart.shp_tp }" width="70px"/>
+					<span class="one_name">
+						${cart.sku_mch }
+					</span>
+					<span class="one_prece">
+						<b>￥${cart.hj }</b><br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除
+					</span>
+				</div>
+			</c:forEach>	
+				<div class="gobottom">
+					共<span>${cart_count }</span>件商品&nbsp;&nbsp;&nbsp;&nbsp;
+					共计￥<span>${sum }</span>
+					<button class="goprice">去购物车</button>
+				</div>
+		</div>
+
+
 </body>
 </html>

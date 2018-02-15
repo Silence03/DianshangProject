@@ -13,11 +13,30 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="search.do">
-		<input type="text" name="keywords"/>
-		<input type="submit" value="搜索"/>
-	</form>
-	<jsp:include page="sale_miniCart.jsp"></jsp:include>
+	<div class="search">
+		<div class="logo"><img src="images/logo.jpg" alt=""></div>
+		<div class="search_on">
+			<div class="se">
+				<form action="search.do">
+					<input type="text" name="keywords" class="lf"/>
+					<input type="submit" class="clik" value="搜索"/>
+				</form>
+			</div>
+			<div class="se">
+				<a href="">取暖神奇</a>
+				<a href="">1元秒杀</a>
+				<a href="">吹风机</a>
+				<a href="">玉兰油</a>
+			</div>
+		</div>
+		
+			<jsp:include page="sale_miniCart.jsp"></jsp:include>
+		
+		
+	</div>
+
+
+	
 	<br/>
 </body>
 </html>

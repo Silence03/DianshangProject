@@ -97,6 +97,7 @@ public class ShoppingCartController {
 			map.put("sum", sum);
 		//}
 		map.put("list_cart", list_cart);
+		map.put("cart_count", list_cart.size());
 		return "sale_miniCart_list_inner";
 	}
 
@@ -191,6 +192,7 @@ public class ShoppingCartController {
 			list_cart.add(cart);
 			session.setAttribute("list_cart", list_cart);
 			map.put("list_cart", list_cart);
+			map.put("cart", cart);
 		}
 		return "sale_cart_success";
 	}

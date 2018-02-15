@@ -13,7 +13,7 @@
 <title>商城首页</title>
 </head>
 <body>
-	<h2 align="center">交易系统首页</h2>
+	
 	<jsp:include page="sale_header.jsp"></jsp:include>
 	<br/>
 	<jsp:include page="sale_index_search.jsp"></jsp:include>

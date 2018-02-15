@@ -10,7 +10,7 @@
 <script type="text/javascript">
 	function get_param_up(shxm_id,shxzh_id,shxzhmch){
 		//$("#attr_param").append("<input type='text' name='attr_param' value="+shxm_id+"_"+shxzh_id+" />"+shxzhmch+"");
-		$("#attr_param").append("<input type='text' name='attr_param' value='{\"shxm_id\":"+shxm_id+",\"shxzh_id\":"+shxzh_id+"}' />"+shxzhmch+"&nbsp;&nbsp;");
+		$("#attr_param").append("<input  type='text' name='attr_param' value='{\"shxm_id\":"+shxm_id+",\"shxzh_id\":"+shxzh_id+"}' />"+shxzhmch+"&nbsp;&nbsp;");
 		
 		get_sku_list_json();
 	}
@@ -45,16 +45,30 @@
 <title>Insert title here</title>
 </head>
 <body>
-	属性列表：
-	<div id="attr_param"></div>
-	<c:forEach items="${attrlist }" var="attr"  varStatus="status">
-		<div id="attr_${attr.id }" >
-			${attr.shxm_mch}:
-			<c:forEach items="${attr.list_value }" var="val">
-				 &nbsp;&nbsp;<a href="javascript:get_param_up(${attr.id },${val.id },'${val.shxzh }${val.shxzh_mch }');">${val.shxzh }${val.shxzh_mch }</a>
-			</c:forEach>
-			<br/>
+	<div class="Sscreen">
+		<div class="title">
+			平板电视 商品筛选 共1205个商品
 		</div>
-	</c:forEach>
+		<div id="attr_param"></div>
+		<c:forEach items="${attrlist }" var="attr"  varStatus="status">
+			<div id="attr_${attr.id }" class="list">
+				<span>${attr.shxm_mch}:</span>
+				<c:forEach items="${attr.list_value }" var="val">
+					 <a href="javascript:get_param_up(${attr.id },${val.id },'${val.shxzh }${val.shxzh_mch }');">${val.shxzh }${val.shxzh_mch }</a>
+				</c:forEach>
+				<br/>
+			</div>
+		</c:forEach>
+		
+		<div class="list">
+			<span class="list_span" id="list_beas">销量</span>
+			<span class="list_span">价格</span>
+			<span class="list_span">评论数</span>
+			<span class="list_span">上架时间</span>
+		</div>
+	</div>
+
+
+
 </body>
 </html>

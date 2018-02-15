@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/css.css">	
+	<link rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
 	function check_item(sku_id,checked){
@@ -22,8 +24,14 @@
 </head>
 <body>
 	<h2 align="center">购物车列表</h2>
-	<div id="sale_cart_list_inner">
+	
+	<div class="Cbox" id="sale_cart_list_inner">
 		<jsp:include page="sale_cart_list_inner.jsp"></jsp:include>
+	</div>
+	
+	<div class="footer">
+		<div class="top"></div>
+		<div class="bottom"><img src="images/foot.jpg" alt=""></div>
 	</div>
 </body>
 </html>
