@@ -53,9 +53,24 @@
 		<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 			<property name="basePackage" value="com.atguigu.mall.sale.mapper"/>
 		</bean>
+		
 		<!-- 事务管理器 -->
 		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 			<property name="dataSource" ref="dataSource" />
 		</bean>
-			
+		<!-- 基于xml方式配置事务 -->
+		<!-- 1.配置事务属性 -->
+		<tx:advice id="txAdvice" transaction-manager="transactionManager">
+			<tx:attributes>
+				<tx:method name="*"/>
+			</tx:attributes>
+		</tx:advice>
+		<!-- 2.配合事务切入点 -->
+		<aop:config>
+			<aop:pointcut expression="execution(* com.atguigu.mall.sale.*.*(..))" id="aoppoint"/>
+			<aop:advisor advice-ref="txAdvice" pointcut-ref="aoppoint"/>
+		</aop:config>
+
+		<!-- 基于注解方式配置事务 
+		<tx:annotation-driven transaction-manager="transactionManager"/>-->
 </beans>

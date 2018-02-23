@@ -2,12 +2,15 @@ package com.atguigu.mall.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.atguigu.mall.bean.T_MALL_USER_ACCOUNT;
 import com.atguigu.mall.mapper.UserMapper;
 import com.atguigu.mall.service.UserService;
 import com.atguigu.mall.util.MyRoutingDataSource;
 @Service
+@Transactional(propagation=Propagation.REQUIRED)
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
@@ -16,15 +19,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public T_MALL_USER_ACCOUNT login(T_MALL_USER_ACCOUNT user) {
 		//使用数据源1
-		MyRoutingDataSource.setKey("1");
-		return userMapper.selectUserByYhmcAndPwd(user);
+		//MyRoutingDataSource.setKey("1");
+		T_MALL_USER_ACCOUNT selectUserByYhmcAndPwd = userMapper.selectUserByYhmcAndPwd(user);
+		return selectUserByYhmcAndPwd;
 	}
 
 	@Override
 	public T_MALL_USER_ACCOUNT login2(T_MALL_USER_ACCOUNT user) {
 		// 使用数据源2
-		MyRoutingDataSource.setKey("2");
-		return userMapper.selectUserByYhmcAndPwd(user);
+		//MyRoutingDataSource.setKey("2");
+		T_MALL_USER_ACCOUNT selectUserByYhmcAndPwd = userMapper.selectUserByYhmcAndPwd(user);
+		return selectUserByYhmcAndPwd;
 	}
 
 	@Override

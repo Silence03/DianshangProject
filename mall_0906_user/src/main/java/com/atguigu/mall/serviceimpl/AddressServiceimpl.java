@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.atguigu.mall.bean.T_MALL_ADDRESS;
 import com.atguigu.mall.bean.T_MALL_USER_ACCOUNT;
@@ -11,6 +13,7 @@ import com.atguigu.mall.mapper.AddressMapper;
 import com.atguigu.mall.service.AddressService;
 
 @Service
+@Transactional(propagation=Propagation.REQUIRED)
 public class AddressServiceimpl implements AddressService {
 	
 	@Autowired

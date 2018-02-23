@@ -52,6 +52,7 @@
 		spu.pp_id=tm.Id and 
 		flbh2=#{class_2_id}
 		${sql}
+		${order}
 	</select>
 	<!-- List<OBJECCT_T_MALL_SKU> select_skulist_by_class_2_id(Integer class_2_id); -->
 	<select id="select_skulist_by_class_2_id" parameterType="int" resultMap="myskulist" >

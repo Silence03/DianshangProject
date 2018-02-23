@@ -9,7 +9,7 @@
 	
 	<!-- 	T_MALL_USER_ACCOUNT selectUserByYhmcAndPwd(T_MALL_USER_ACCOUNT user); -->
 	<select id="selectUserByYhmcAndPwd" resultType="com.atguigu.mall.bean.T_MALL_USER_ACCOUNT">
-		select * from t_mall_user_account where yh_mch=#{yh_mch} and yh_mm=#{yh_mm}
+		select * from t_mall_user_account where yh_mch=#{yh_mch} and yh_mm=#{yh_mm} for update
 	</select>
 	
 	<!-- T_MALL_USER_ACCOUNT insert(T_MALL_USER_ACCOUNT user); -->

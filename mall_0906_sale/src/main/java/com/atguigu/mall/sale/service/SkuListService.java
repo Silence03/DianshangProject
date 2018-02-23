@@ -11,7 +11,7 @@ public interface SkuListService {
 
 	List<OBJECCT_T_MALL_SKU> get_skulist(Integer class_2_id);
 
-	List<OBJECCT_T_MALL_SKU> select_skulist_by_attr(Integer class_2_id,List<T_MALL_SKU_ATTR_VALUE> list_av);
+	List<OBJECCT_T_MALL_SKU> select_skulist_by_attr(Integer class_2_id,List<T_MALL_SKU_ATTR_VALUE> list_av,String order);
 
 	DETAIL_T_MALL_SKU get_sku_detail(Integer sku_id, Integer spu_id);
 

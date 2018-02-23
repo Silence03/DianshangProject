@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.atguigu.mall.bean.T_MALL_USER_ACCOUNT;
 import com.atguigu.mall.server.UserServer;
 import com.atguigu.mall.service.UserService;
+import com.atguigu.mall.util.MyRoutingDataSource;
 import com.google.gson.Gson;
 
 
@@ -22,13 +23,15 @@ public class UserServerImpl implements UserServer {
 
 	@Override
 	public T_MALL_USER_ACCOUNT login(T_MALL_USER_ACCOUNT user) {
-		
+		//使用数据源1
+		MyRoutingDataSource.setKey("1");
 		return userService.login(user);
 	}
 
 	@Override
 	public T_MALL_USER_ACCOUNT login2(T_MALL_USER_ACCOUNT user) {
-		// TODO Auto-generated method stub
+		// 使用数据源2
+		MyRoutingDataSource.setKey("2");
 		return userService.login2(user);
 	}
 

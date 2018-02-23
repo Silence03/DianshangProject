@@ -40,7 +40,7 @@ public class SkuListController {
 //	}
 	//根据属性检索商品(json方式传参)
 	@RequestMapping("/get_sku_list_by_attr")
-	public String get_sku_list_by_attr(Integer class_2_id,OBJECT_T_MALL_SKU_ATTR_VALUE list_sku_av, Map<String,Object>map) {
+	public String get_sku_list_by_attr(String order,Integer class_2_id,OBJECT_T_MALL_SKU_ATTR_VALUE list_sku_av, Map<String,Object>map) {
 		//mysql数据库查询
 		//List<OBJECCT_T_MALL_SKU> skulist = skuListService.select_skulist_by_attr(class_2_id, list_sku_av.getList_sku_av());
 		
@@ -48,16 +48,20 @@ public class SkuListController {
 		List<OBJECCT_T_MALL_SKU> skulist = null;
 		//1.缓存查询
 		List<T_MALL_SKU_ATTR_VALUE> list_sku_av2 = list_sku_av.getList_sku_av();
-		String[] keys = new String[list_sku_av2.size()];//一个属性名id(key)对应属性值集合(value)
-		for (int i = 0; i < list_sku_av2.size(); i++) {
-			String key = "attr_"+class_2_id+"_"+list_sku_av2.get(i).getShxm_id()+"_"+list_sku_av2.get(i).getShxzh_id();
-			keys[i]=key;
+		String new_key = "";
+		if(list_sku_av2!=null && list_sku_av2.size()>0) {
+			String[] keys = new String[list_sku_av2.size()];//一个属性名id(key)对应属性值集合(value)
+			for (int i = 0; i < list_sku_av2.size(); i++) {
+				String key = "attr_"+class_2_id+"_"+list_sku_av2.get(i).getShxm_id()+"_"+list_sku_av2.get(i).getShxzh_id();
+				keys[i]=key;
+			}
+			new_key = CacheUtil.getinnerkey(keys);
+			skulist = CacheUtil.getMyListByKey(new_key, OBJECCT_T_MALL_SKU.class);
 		}
-		String new_key = CacheUtil.getinnerkey(keys);
-		skulist = CacheUtil.getMyListByKey(new_key, OBJECCT_T_MALL_SKU.class);
+		
 		if(skulist==null || skulist.size()==0) {
 			//2.mysql查询
-			skulist = skuListService.select_skulist_by_attr(class_2_id, list_sku_av.getList_sku_av());
+			skulist = skuListService.select_skulist_by_attr(class_2_id, list_sku_av.getList_sku_av(),order);
 			
 			//同步缓存
 			CacheUtil.setMyListByKey(new_key, skulist);
@@ -66,6 +70,7 @@ public class SkuListController {
 		
 		map.put("skulist", skulist);
 		map.put("class_2_id", class_2_id);
+		//map.put("order", order);
 		return "sale_sku_list_inner";
 	}
 	@RequestMapping("/goto_attr_list")
