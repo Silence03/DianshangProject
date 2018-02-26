@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.mall.sale.mapper.LoginMapper">
+	
+	
+	
+	<!-- 	T_MALL_USER_ACCOUNT selectUserByMcAndMm(T_MALL_USER_ACCOUNT user); -->
+	<select id="selectUserByMcAndMm" resultType="com.atguigu.mall.sale.bean.T_MALL_USER_ACCOUNT">
+		select * from t_mall_user_account where yh_mch=#{yh_mch} and yh_mm=#{yh_mm}
+	</select>
+
+		
+</mapper>
