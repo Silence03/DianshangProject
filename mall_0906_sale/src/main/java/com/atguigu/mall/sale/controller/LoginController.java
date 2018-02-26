@@ -6,11 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +26,6 @@ import com.atguigu.mall.sale.bean.T_MALL_USER_ACCOUNT;
 import com.atguigu.mall.sale.service.LoginService;
 import com.atguigu.mall.sale.service.ShoppingCartService;
 import com.atguigu.mall.sale.util.MyJsonUtil;
-import com.atguigu.mall.sale.util.MyWsUtil;
-import com.atguigu.mall.sale.util.PropertiyUtil;
 import com.atguigu.mall.server.UserServer;
 
 @Controller
@@ -36,6 +40,12 @@ public class LoginController {
 	@Autowired
 	LoginService loginService;
 	
+	@Autowired
+	JmsTemplate jmsTemplate;
+	
+	@Autowired
+	ActiveMQQueue queueDestination;
+	
 	@RequestMapping("/goto_sale_login")
 	public String toLogin() {
 		return "sale_login";
@@ -43,6 +53,18 @@ public class LoginController {
 	//注销
 	@RequestMapping("/goto_logout")
 	public String goto_logout(HttpSession session) {
+		
+		T_MALL_USER_ACCOUNT loginuser = (T_MALL_USER_ACCOUNT) session.getAttribute("user");
+		//调用系统日志服务，写入日志
+		int userid = loginuser.getId();
+		String yh_mch = loginuser.getYh_mch();
+		jmsTemplate.send(queueDestination, new MessageCreator() {
+			@Override
+			public Message createMessage(Session session) throws JMSException {
+				return session.createTextMessage("userid="+userid+"&yh_mch="+yh_mch+"&inorout=logout");
+			}
+		});
+		//注销session
 		session.invalidate();
 		return "redirect:/goto_sale_index.do";
 	}
@@ -129,6 +151,19 @@ public class LoginController {
 			cookie2.setPath("/");
 			response.addCookie(cookie2);
 			session.setAttribute("list_cart", shoppingCartService.get_list_cart(loginuser));
+			
+			//调用系统日志服务，写入日志
+			int userid = loginuser.getId();
+			String yh_mch = loginuser.getYh_mch();
+			jmsTemplate.send(queueDestination, new MessageCreator() {
+				@Override
+				public Message createMessage(Session session) throws JMSException {
+					return session.createTextMessage("userid="+userid+"&yh_mch="+yh_mch+"&inorout=login");
+				}
+			});
+
+			
+			
 			
 			return "redirect:/goto_sale_index.do";
 		}

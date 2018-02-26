@@ -73,4 +73,28 @@
 
 		<!-- 基于注解方式配置事务 
 		<tx:annotation-driven transaction-manager="transactionManager"/>-->
+		
+		<!-- jms消息工厂 -->
+		<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+			<property name="brokerURL" value="tcp://localhost:61616" />
+		</bean>
+		<bean id="connectionFactory"
+			class="org.springframework.jms.connection.SingleConnectionFactory">
+			<!--产生JMS Connection的ConnectionFactory -->
+			<property name="targetConnectionFactory" ref="targetConnectionFactory" />
+		</bean>
+		
+		<!-- 执行消息任务的模板 -->
+		<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+			<property name="connectionFactory" ref="connectionFactory" />
+		</bean>
+		<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+			<constructor-arg value="logqueue" />
+		</bean>
+		<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+			<constructor-arg value="logtopic" />
+		</bean>
+		
+		
+		
 </beans>

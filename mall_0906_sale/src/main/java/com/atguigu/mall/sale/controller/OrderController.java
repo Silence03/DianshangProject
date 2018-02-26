@@ -2,15 +2,22 @@ package com.atguigu.mall.sale.controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
 import javax.servlet.http.HttpSession;
 
+import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +47,12 @@ public class OrderController {
 	@Autowired
 	ShoppingCartService shoppingCartService;
 	
+	@Autowired
+	JmsTemplate jmsTemplate;
+	
+	@Autowired
+	ActiveMQQueue queueDestination;
+	
 	//保存订单处理
 	@RequestMapping("/save_order")
 	public String save_order(String address_id,@ModelAttribute("order")OBJECT_T_MALL_ORDER order,HttpSession session) {
@@ -61,9 +74,20 @@ public class OrderController {
 	//支付完成后进行的业务，即修改订单状态以及更新信息
 	@RequestMapping("/pay_after")
 	public String pay_after(@ModelAttribute("order")OBJECT_T_MALL_ORDER order) {
-		//调用支付服务成功后调用订单通知业务
+		//调用支付服务成功后调用订单通知业务(MQ消息队列)
 		try {
 			orderService.pay_order(order);
+			
+			//调用系统日志服务，写入订单日志
+			String order_json = MyJsonUtil.object_to_json(order);
+			jmsTemplate.send(queueDestination, new MessageCreator() {
+				@Override
+				public Message createMessage(Session session) throws JMSException {
+					return session.createTextMessage("order="+order_json);
+				}
+			});
+			
+			
 		} catch (MySaleException e) {
 			e.printStackTrace();
 			return "sale_error";

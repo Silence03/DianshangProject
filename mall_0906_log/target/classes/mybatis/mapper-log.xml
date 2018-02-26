@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.mall.log.mapper.LogMapper">
+
+	<!-- void insertLoginout(Map<String, Object> map); -->
+	<insert id="insertLoginout" parameterType="map">
+		insert into loginout(userid,yh_mch,inorout,text) values(#{userid},#{yh_mch},#{inorout},#{text})
+	</insert>
+	
+	<!-- void insertKeyWords(Map<String, Object> map); -->
+	<insert id="insertKeyWords" parameterType="map">
+		insert into keywords(userid,yh_mch,keywords,text) values(#{userid},#{yh_mch},#{keywords},#{text})
+	</insert>
+	
+	<!-- void insertOrderLog(Map<String, Object> map); -->
+	<insert id="insertOrderLog">
+		insert into orderlog(userid,orderid,zje) values(#{order.yh_id},#{order.id},#{order.zje})
+	</insert>
+	
+		
+</mapper>
